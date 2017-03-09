@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Phase1 {
 
-	private String fileName = "k05.csv";
+	private String fileName = "k10.csv";
 	private int costLimit;
 	private List<Node> item;
 	private int pop_size = 100;
@@ -27,7 +27,8 @@ public class Phase1 {
 
 		ph.printPopulation();
 
-		ph.crossover();
+		ph.makeNewGeneration();
+
 
 	}
 
@@ -88,13 +89,6 @@ public class Phase1 {
 
 		for(int i = 0; i < pop.size(); i++){
 			System.out.println(i+1 + " - " + pop.get(i) + "   [Fitness: " + fitness.get(i) + "]");
-
-			chanceOfMutation(pop.get(i));
-			
-			String test = chanceOfMutation(pop.get(i));
-
-			if (!test.equals(pop.get(i)))
-				System.out.println(i+1 + " Mutated - " + test);
 		}
 
 		System.out.println("\nBest solution: " + best_solution);
@@ -201,34 +195,42 @@ public class Phase1 {
 		return organism;
 	}
 
-	private void makeNewGeneration() {
-		// perform mutation on population: chanceOfMutation()
-		for(int i = 0; i < pop.size(); i++){
-			
-			string mutatedOrg = chanceOfMutation(pop.get(i));
-			if (!mutatedOrg.equals(pop.get(i))){
-				pop.set(i, mutatedOrg);  	
+	private void makeNewGeneration() throws Exception{
+		
+		while(!isIdentical()){
+			// perform mutation on population: chanceOfMutation()
+			for(int i = 0; i < pop.size(); i++){
+				
+				String mutatedOrg = chanceOfMutation(pop.get(i));
+				if (!mutatedOrg.equals(pop.get(i))){
+					pop.set(i, mutatedOrg);  	
+				}
 			}
+
+			// Perform crossover on random parents: crossover()
+			crossover();
+
+			fitness.clear();
+
+			// Perform fitness calculation: evalPop()
+			evalPop();
+
+			printPopulation();
 		}
-
-		// Perform crossover on random parents: crossover()
-		crossover();
-
-		// Perform fitness calculation: evalPop()
-		evalPop();
 	}
 
 	private void crossover() {
+
+		StringBuilder new_org = new StringBuilder(createOrganism());
 
 		double r = (Math.random() * 100) - 1;
 		double r2 = (Math.random() * 100) - 1;
 
 		String org_1 = pop.get((int)r);
 		String org_2 = pop.get((int)r);
-		String new_org = createOrganism();
 
-		for(int i = 0; i < pop.size(); i++){
-			if((pop_size / 2) <= i){
+		for(int i = 0; i < item.size(); i++){
+			if((item.size() / 2) <= i){
 				new_org.setCharAt(i, org_1.charAt(i));
 			}
 			else{
@@ -236,7 +238,7 @@ public class Phase1 {
 			}
 		}
 
-		pop.set(lowestFitnessIndex(), new_org);
+		pop.set(lowestFitnessIndex(), new_org.toString());
 
 		
 	}
@@ -247,11 +249,27 @@ public class Phase1 {
 
 		for(int i = 1; i < pop_size; i++){
 
-			if(fitnes.get(lowest) > fitness.get(i)){
+			if(fitness.get(lowest) > fitness.get(i)){
 				lowest = i;
 			}
 		}
 
 		return lowest;
+	}
+
+	private boolean isIdentical(){
+
+		String org = pop.get(0);
+		boolean flag = false;
+
+		for(int i = 1; i < pop_size; i++){
+
+			if(!org.equals(pop.get(i))){
+				return flag;
+			}
+
+		}
+
+		return !flag;
 	}
 }
