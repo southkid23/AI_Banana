@@ -13,25 +13,23 @@ public class Phase1 {
 	private List<String> pop = new ArrayList<String>();
 	private List<Integer> fitness = new ArrayList<Integer>();
 	
-
 	public static void main(String[] args) throws Exception{
 
 		Phase1 ph = new Phase1();
 
-		ph.readCSV();
-
-		ph.generatePop();
-
-		System.out.println("\nFirst Generation: ");
-		System.out.println("Population: ");
-
+		ph.initialization();
 		ph.printPopulation();
+	}
 
-		ph.evalPop();
-
-		System.out.println("Fitness: ");
-
-		ph.printFitness();
+	private void initialization() throws Exception {
+		System.out.println("Initializing...");
+		// Read Items
+		readCSV();
+		// Generate Populations from given list of items
+		generatePop();
+		// Calculate fitness for each item
+		evalPop();
+		System.out.println("Initialization complete.");
 	}
 
 	public void readCSV() throws Exception{
@@ -69,46 +67,47 @@ public class Phase1 {
 
 	public void printPopulation() throws Exception{
 
-		for(int i = 0; i < pop.size(); i++){
-			System.out.println(i + " - " + pop.get(i));
-		}
-	}
-
-	public void printFitness() throws Exception{
+		System.out.println("\nFirst Generation: ");
+		System.out.println("Population: ");
 
 		for(int i = 0; i < pop.size(); i++){
-			System.out.println(i + " - " + fitness.get(i));
+			System.out.println(i+1 + " - " + pop.get(i) + "   [Fitness: " + fitness.get(i) + "]");
+
+			chanceOfMutation(pop.get(i));
+			
+			String test = chanceOfMutation(pop.get(i));
+
+			if (!test.equals(pop.get(i)))
+				System.out.println(i+1 + " Mutated - " + test);
 		}
 	}
-
 
 	private void generatePop() {
 
 		for(int i = 0; i < pop_size; i++){
-			pop.add(createOrg());
+			pop.add(createOrganism());
 		}
 	}
 
-	private String createOrg() {
+	private String createOrganism() {
 
-		StringBuilder org = new StringBuilder(item.size());
+		StringBuilder organism = new StringBuilder(item.size());
 
 		for(int i = 0; i < item.size(); i++){
 
 			double r = Math.random();
 			if(r > 0.5) {
-				org.append("0");
+				organism.append("0");
 			}
 			else{
-				org.append("1");
+				organism.append("1");
 			}
 
 		}
-
-		return org.toString();
+		return organism.toString();
 	}
 
-	private void evalOrg(String org) {
+	private void evalOrg(String organism) {
 
 		int total_cost = 0;
 		int total_value = 0;
@@ -116,7 +115,7 @@ public class Phase1 {
 
 		for(int i = 0; i < item.size(); i++){
 
-			c = org.charAt(i);
+			c = organism.charAt(i);
 
 			if(c == '1'){
 				total_cost = total_cost + item.get(i).cost;
@@ -137,5 +136,34 @@ public class Phase1 {
 		for(int i = 0; i < pop.size(); i++){
 			evalOrg(pop.get(i));
 		}
+	}
+
+	private int generateMutationChances(){
+		// Randomly generates a number in range (1, 200)
+		int maximum = 200, minimum = 1;
+		return ((int) (Math.random()*(maximum - minimum))) + minimum; 
+	}
+
+
+	private String chanceOfMutation(String organism){
+		StringBuilder tempOrganism = new StringBuilder(organism);
+		char c;
+		int tempVar;
+
+		for(int i = 0; i < item.size(); i++){
+
+			c = organism.charAt(i);
+			tempVar = generateMutationChances();
+
+			if(tempVar == 1){
+				if (c == 1) {
+					tempOrganism.setCharAt(i, '0');
+				} else
+					tempOrganism.setCharAt(i, '1');
+			}
+		}
+
+		organism = tempOrganism.toString();
+		return organism;
 	}
 }
