@@ -12,6 +12,9 @@ public class Phase1 {
 	private int pop_size = 100;
 	private List<String> pop = new ArrayList<String>();
 	private List<Integer> fitness = new ArrayList<Integer>();
+	private String best_solution;
+	private int best_index;
+	private float mean_fitness;
 	
 	public static void main(String[] args) throws Exception{
 
@@ -29,7 +32,14 @@ public class Phase1 {
 		generatePop();
 		// Calculate fitness for each item
 		evalPop();
+
+		System.out.println("Best solution: " + ph.best_solution);
+		System.out.println("Best solution number: " + ph.best_index);
+
+		System.out.println("Mean fitness of generation: " + ph.mean_fitness);
+
 		System.out.println("Initialization complete.");
+
 	}
 
 	public void readCSV() throws Exception{
@@ -132,10 +142,23 @@ public class Phase1 {
 	}
 
 	private void evalPop() {
-
+		best_index = 0;
+		int total_fitness = 0;
+		// calculate the fitness for each organism
 		for(int i = 0; i < pop.size(); i++){
 			evalOrg(pop.get(i));
+		
+			// look for the best solution (best fitness) in the generation
+			if(fitness.get(best_index) < fitness.get(i)){
+				best_index = i;
+				best_solution = pop.get(i);
+			}
+
+			total_fitness = total_fitness + fitness.get(i);
 		}
+
+		mean_fitness = (float)total_fitness / pop_size;
+			
 	}
 
 	private int generateMutationChances(){
