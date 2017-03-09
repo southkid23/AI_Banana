@@ -15,6 +15,7 @@ public class Phase1 {
 	private String best_solution;
 	private int best_index;
 	private float mean_fitness;
+	private String offspring;
 	
 	public static void main(String[] args) throws Exception{
 
@@ -33,10 +34,10 @@ public class Phase1 {
 		// Calculate fitness for each item
 		evalPop();
 
-		System.out.println("Best solution: " + ph.best_solution);
-		System.out.println("Best solution number: " + ph.best_index);
+		System.out.println("Best solution: " + best_solution);
+		System.out.println("Best solution number: " + best_index);
 
-		System.out.println("Mean fitness of generation: " + ph.mean_fitness);
+		System.out.println("Mean fitness of generation: " + mean_fitness);
 
 		System.out.println("Initialization complete.");
 
@@ -188,5 +189,15 @@ public class Phase1 {
 
 		organism = tempOrganism.toString();
 		return organism;
+	}
+
+	private void makeNewGeneration() {
+
+		
+	}
+
+	private void crossover() {
+
+		
 	}
 }
