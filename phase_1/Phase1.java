@@ -27,6 +27,8 @@ public class Phase1 {
 
 		ph.printPopulation();
 
+		ph.crossover();
+
 	}
 
 	private void initialization() throws Exception {
@@ -206,6 +208,38 @@ public class Phase1 {
 
 	private void crossover() {
 
+		double r = (Math.random() * 100) - 1;
+		double r2 = (Math.random() * 100) - 1;
+
+		String org_1 = pop.get((int)r);
+		String org_2 = pop.get((int)r);
+		String new_org = createOrganism();
+
+		for(int i = 0; i < pop.size(); i++){
+			if((pop_size / 2) <= i){
+				new_org.setCharAt(i, org_1.charAt(i));
+			}
+			else{
+				new_org.setCharAt(i, org_2.charAt(i));
+			}
+		}
+
+		pop.set(lowestFitnessIndex(), new_org);
+
 		
+	}
+
+	private int lowestFitnessIndex(){
+
+		int lowest = 0;
+
+		for(int i = 1; i < pop_size; i++){
+
+			if(fitnes.get(lowest) > fitness.get(i)){
+				lowest = i;
+			}
+		}
+
+		return lowest;
 	}
 }
