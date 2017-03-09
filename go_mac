@@ -5,10 +5,14 @@ read PHASENUM
 javac phase_$PHASENUM/*.java
 
 if [ "$?" != "0" ]; then
-    echo "[Error] Compiled with errors -> check if folder exists." 1>&2
+    echo "[Error] Compiled with errors" 1>&2
     exit 1
 fi
-/usr/bin/osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
+# AppleScript to clear output 
+# Several cases online experienced issues
+# /usr/bin/osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "k" using command down'
+
+clear && printf '\e[3J' # Faster than AppleScript and better for scripts
 
 printf "Succesfully compiled.\n"
 
