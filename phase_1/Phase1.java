@@ -202,8 +202,20 @@ public class Phase1 {
 	}
 
 	private void makeNewGeneration() {
+		// perform mutation on population: chanceOfMutation()
+		for(int i = 0; i < pop.size(); i++){
+			
+			string mutatedOrg = chanceOfMutation(pop.get(i));
+			if (!mutatedOrg.equals(pop.get(i))){
+				pop.set(i, mutatedOrg);  	
+			}
+		}
 
-		
+		// Perform crossover on random parents: crossover()
+		crossover();
+
+		// Perform fitness calculation: evalPop()
+		evalPop();
 	}
 
 	private void crossover() {
