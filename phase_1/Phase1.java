@@ -21,7 +21,11 @@ public class Phase1 {
 		Phase1 ph = new Phase1();
 
 		ph.initialization();
+
+		ph.printItems();
+
 		ph.printPopulation();
+
 	}
 
 	private void initialization() throws Exception {
@@ -32,11 +36,6 @@ public class Phase1 {
 		generatePop();
 		// Calculate fitness for each item
 		evalPop();
-
-		System.out.println("Best solution: " + ph.best_solution);
-		System.out.println("Best solution number: " + ph.best_index);
-
-		System.out.println("Mean fitness of generation: " + ph.mean_fitness);
 
 		System.out.println("Initialization complete.");
 
@@ -64,12 +63,11 @@ public class Phase1 {
             int value = Integer.parseInt(data[2]);
 
             item.add(new Node(name,cost,value));
-
         }
 	}
 
 	public void printItems() throws Exception{
-
+		System.out.println("\nItems in CSV");
 		for(int i = 0; i < item.size(); i++){
 			System.out.println("Name:"+item.get(i).name + " | Cost:"+item.get(i).cost + " | Value:"+item.get(i).value);
 		}
@@ -90,6 +88,13 @@ public class Phase1 {
 			if (!test.equals(pop.get(i)))
 				System.out.println(i+1 + " Mutated - " + test);
 		}
+
+		System.out.println("\nBest solution: " + best_solution);
+		
+		int best = best_index + 1;
+		System.out.println("Best solution number: " + best);
+
+		System.out.println("Mean fitness of generation: " + mean_fitness + "\n");
 	}
 
 	private void generatePop() {
@@ -157,8 +162,7 @@ public class Phase1 {
 			total_fitness = total_fitness + fitness.get(i);
 		}
 
-		mean_fitness = (float)total_fitness / pop_size;
-			
+		mean_fitness = (float)total_fitness / pop_size;	
 	}
 
 	private int generateMutationChances(){
@@ -166,7 +170,6 @@ public class Phase1 {
 		int maximum = 200, minimum = 1;
 		return ((int) (Math.random()*(maximum - minimum))) + minimum; 
 	}
-
 
 	private String chanceOfMutation(String organism){
 		StringBuilder tempOrganism = new StringBuilder(organism);
