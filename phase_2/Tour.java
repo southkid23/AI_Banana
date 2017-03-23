@@ -16,7 +16,7 @@ public class Tour{
     private double fitness = 0;
     private int distance = 0;
     
-    // Constructs a blank tour
+    // Constructor: empty world
     public Tour(){
         for (int i = 0; i < TourManager.numberOfCities(); i++) {
             tour.add(null);
@@ -29,10 +29,11 @@ public class Tour{
 
     // Creates a random individual
     public void generateIndividual() {
-        // Loop through all our destination cities and add them to our tour
+        // Loop through the world Map and add them to our tour
         for (int cityIndex = 0; cityIndex < TourManager.numberOfCities(); cityIndex++) {
           setCity(cityIndex, TourManager.getCity(cityIndex));
         }
+
         // Randomly reorder the tour
         Collections.shuffle(tour);
     }

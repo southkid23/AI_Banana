@@ -1,6 +1,7 @@
 /*
 * City.java
-* Models a city
+* City object that contains a x and y coordinates 
+* 
 */
 
 package phase_2;
@@ -11,8 +12,12 @@ public class City {
     
     // Constructs a randomly placed city
     public City(){
-        this.x = (int)(Math.random()*200);
-        this.y = (int)(Math.random()*200);
+
+        // The size of the domain and range: 100 x 100(squares)
+        int sizeOfMap = 100;
+
+        this.x = (int)(Math.random() * sizeOfMap);
+        this.y = (int)(Math.random() * sizeOfMap);
     }
     
     // Constructs a city at chosen x, y location

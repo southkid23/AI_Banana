@@ -9,21 +9,21 @@ import java.util.ArrayList;
 
 public class TourManager {
 
-    // Holds our cities
-    private static ArrayList destinationCities = new ArrayList<City>();
+    // A world that contains all of the cities
+    private static ArrayList worldMap = new ArrayList<City>();
 
-    // Adds a destination city
+    // Adds a new city to the world map
     public static void addCity(City city) {
-        destinationCities.add(city);
+        worldMap.add(city);
     }
     
-    // Get a city
+    // Get a city from the world map
     public static City getCity(int index){
-        return (City)destinationCities.get(index);
+        return (City)worldMap.get(index);
     }
     
-    // Get the number of destination cities
+    // Get the total count of cities that are in the world map
     public static int numberOfCities(){
-        return destinationCities.size();
+        return worldMap.size();
     }
 }

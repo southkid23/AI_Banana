@@ -8,16 +8,21 @@ public class ReadCSV {
 
 		String fileName = "Cities_01.csv";
         String csvFile = new File("./phase_2/resources/"+fileName).getAbsolutePath();
-        BufferedReader br = null;
+        BufferedReader br = new BufferedReader(new FileReader(csvFile));
         String line = "";
 
-        br = new BufferedReader(new FileReader(csvFile));
         // int i = 0;
         while ((line = br.readLine()) != null) {
-            // // use comma as separator
-            String[] data = line.split(",");
+            
+            /* 
+            	Values are seperated by comma,
+        		pos[0] is the x position,
+            	pos[1] is the y position 
+            */
 
-            City city = new City(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+            String[] pos = line.split(",");
+
+            City city = new City(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
         	TourManager.addCity(city);
 
         	// Testing class functions behaviors

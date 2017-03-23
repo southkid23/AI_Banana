@@ -6,11 +6,12 @@ public class Population {
     Tour[] tours;
 
     // Generate population
-    public Population(int populationSize, boolean initialise) {
+    public Population(int populationSize, boolean initialize) {
         tours = new Tour[populationSize];
-         // If we need to initialise a population of tours do so
-        if (initialise) {
-             // Loop and create individuals
+
+        // Only used for initialization
+        if (initialize) {
+             // Generate individuals
             for (int i = 0; i < populationSize(); i++) {
                 Tour newTour = new Tour();
                 newTour.generateIndividual();
