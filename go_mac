@@ -14,7 +14,8 @@ fi
 
 clear && printf '\e[3J' # Faster than AppleScript and better for scripts
 
-printf "Succesfully compiled.\n"
+printf "Succesfully compiled.\n\n"
 
 java phase_$PHASENUM.Phase$PHASENUM
+# java phase_.TSP_GA
 

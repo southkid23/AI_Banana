@@ -13,8 +13,8 @@ public class City {
     // Constructs a randomly placed city
     public City(){
 
-        // The size of the domain and range: 100 x 100(squares)
-        int sizeOfMap = 100;
+        // The size of the domain and range: 200 and 200
+        int sizeOfMap = 200;
 
         this.x = (int)(Math.random() * sizeOfMap);
         this.y = (int)(Math.random() * sizeOfMap);

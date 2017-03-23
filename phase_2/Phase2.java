@@ -1,8 +1,6 @@
 package phase_2;
 
-public class TSP_GA {
-
-    
+public class Phase2 {
 
     public static void main(String[] args) throws Exception{
 
@@ -51,7 +49,7 @@ public class TSP_GA {
     //     TourManager.addCity(city20);
 
         // Initialize population
-        Population pop = new Population(10, true);
+        Population pop = new Population(50, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         // Evolve population for 100 generations

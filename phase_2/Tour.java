@@ -16,7 +16,7 @@ public class Tour{
     private double fitness = 0;
     private int distance = 0;
     
-    // Constructor: empty world
+    // Constructor: empty journey
     public Tour(){
         for (int i = 0; i < TourManager.numberOfCities(); i++) {
             tour.add(null);
