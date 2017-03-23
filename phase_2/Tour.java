@@ -3,7 +3,7 @@
 * Stores a candidate tour
 */
 
-package tsp;
+package phase_2;
 
 import java.util.ArrayList;
 import java.util.Collections;

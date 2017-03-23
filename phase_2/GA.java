@@ -1,9 +1,4 @@
-/*
-* GA.java
-* Manages algorithms for evolving population
-*/
-
-package tsp;
+package phase_2;
 
 public class GA {
 

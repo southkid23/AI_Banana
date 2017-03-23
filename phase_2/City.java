@@ -3,7 +3,7 @@
 * Models a city
 */
 
-package tsp;
+package phase_2;
 
 public class City {
     int x;

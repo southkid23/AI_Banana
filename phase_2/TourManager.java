@@ -3,7 +3,7 @@
 * Holds the cities of a tour
 */
 
-package tsp;
+package phase_2;
 
 import java.util.ArrayList;
 
