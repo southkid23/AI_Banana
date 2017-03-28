@@ -1,52 +1,39 @@
 package phase_2;
 
+import java.awt.Graphics;
+import java.awt.Color;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+import java.util.*;
+import java.io.*;
+
 public class Phase2 {
+
+
+    private static int canvasWidth = 300;
+    private static int canvasHeight = 300;
 
     public static void main(String[] args) throws Exception{
 
+        JFrame window = new JFrame("Initial");
+        JFrame window2 = new JFrame("Final");
+        MyCanvas myCanvas = new MyCanvas();
+        MyCanvas myCanvas2 = new MyCanvas();
+        List<String> ppp = new ArrayList<String>();
+        List<String> ppp2 = new ArrayList<String>();
+
         ReadCSV.read();
 
-    //     // Create and add our cities
-    //     City city = new City(60, 200);
-    //     TourManager.addCity(city);
-    //     City city2 = new City(180, 200);
-    //     TourManager.addCity(city2);
-    //     City city3 = new City(80, 180);
-    //     TourManager.addCity(city3);
-    //     City city4 = new City(140, 180);
-    //     TourManager.addCity(city4);
-    //     City city5 = new City(20, 160);
-    //     TourManager.addCity(city5);
-    //     City city6 = new City(100, 160);
-    //     TourManager.addCity(city6);
-    //     City city7 = new City(200, 160);
-    //     TourManager.addCity(city7);
-    //     City city8 = new City(140, 140);
-    //     TourManager.addCity(city8);
-    //     City city9 = new City(40, 120);
-    //     TourManager.addCity(city9);
-    //     City city10 = new City(100, 120);
-    //     TourManager.addCity(city10);
-    //     City city11 = new City(180, 100);
-    //     TourManager.addCity(city11);
-    //     City city12 = new City(60, 80);
-    //     TourManager.addCity(city12);
-    //     City city13 = new City(120, 80);
-    //     TourManager.addCity(city13);
-    //     City city14 = new City(180, 60);
-    //     TourManager.addCity(city14);
-    //     City city15 = new City(20, 40);
-    //     TourManager.addCity(city15);
-    //     City city16 = new City(100, 40);
-    //     TourManager.addCity(city16);
-    //     City city17 = new City(200, 40);
-    //     TourManager.addCity(city17);
-    //     City city18 = new City(20, 20);
-    //     TourManager.addCity(city18);
-    //     City city19 = new City(60, 20);
-    //     TourManager.addCity(city19);
-    //     City city20 = new City(160, 20);
-    //     TourManager.addCity(city20);
+        ppp = ReadCSV.getList();
+
+        myCanvas.setCoordinates(ppp);
+
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setBounds(200, 200, canvasWidth, canvasHeight);
+        window.getContentPane().add(myCanvas);
+        window.setVisible(true);
 
         // Initialize population
         Population pop = new Population(500, true);
@@ -60,7 +47,25 @@ public class Phase2 {
 
         // Print final results
         System.out.println("Final distance: " + pop.getFittest().getDistance());
+        GA.getIterations();
+        Tour fittest = pop.getFittest();
         System.out.println("Solution:");
-        System.out.println(pop.getFittest());
+        System.out.println(fittest);
+
+        String x;
+        String y;
+        for (int i = 0; i < fittest.tourSize(); i++) {
+            x = Integer.toString(fittest.getCity(i).getX());
+            y = Integer.toString(fittest.getCity(i).getY());
+            ppp2.add(x);
+            ppp2.add(y);
+        }
+
+        myCanvas2.setCoordinates(ppp2);
+
+        window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window2.setBounds(800, 200, canvasWidth, canvasHeight);
+        window2.getContentPane().add(myCanvas2);
+        window2.setVisible(true);
     }
 }

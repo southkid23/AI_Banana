@@ -33,7 +33,7 @@ public class Population {
     // Gets the best tour in the population
     public Tour getFittest() {
         Tour fittest = tours[0];
-         // Loop through individuals to find fittest
+        // Loop through individuals to find fittest
         for (int i = 1; i < populationSize(); i++) {
             if (fittest.getFitness() <= getTour(i).getFitness()) {
                 fittest = getTour(i);
