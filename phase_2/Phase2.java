@@ -49,7 +49,7 @@ public class Phase2 {
     //     TourManager.addCity(city20);
 
         // Initialize population
-        Population pop = new Population(50, true);
+        Population pop = new Population(500, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         // Evolve population for 100 generations
