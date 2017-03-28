@@ -4,8 +4,11 @@ import java.io.*;
 import java.util.*;
 
 public class ReadCSV {
-	public static void read() throws Exception{
 
+    private static List<String> originalList = new ArrayList<String>();
+
+	public static void read() throws Exception{
+        
 		String fileName = "Cities_01.csv";
         String csvFile = new File("./phase_2/resources/"+fileName).getAbsolutePath();
         BufferedReader br = new BufferedReader(new FileReader(csvFile));
@@ -22,6 +25,9 @@ public class ReadCSV {
 
             String[] pos = line.split(",");
 
+            originalList.add(pos[0]);
+            originalList.add(pos[1]);
+
             City city = new City(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
         	TourManager.addCity(city);
 
@@ -30,5 +36,9 @@ public class ReadCSV {
 			// System.out.println(TourManager.getCity(i).x + " " + TourManager.getCity(i).y);
 			// i++;
         }
+    }
+
+    public static List<String> getList() {
+        return originalList;
     }
 }

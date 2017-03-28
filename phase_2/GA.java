@@ -7,10 +7,13 @@ public class GA {
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 
+    private static int iterations = 0;
+
     // Evolves a population over one generation
     public static Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.populationSize(), false);
 
+        iterations++;
         // Keep our best individual if elitism is enabled
         int elitismOffset = 0;
         if (elitism) {
@@ -111,5 +114,9 @@ public class GA {
         // Get the fittest tour
         Tour fittest = tournament.getFittest();
         return fittest;
+    }
+
+    public static void getIterations() {
+        System.out.println("Iterations: " + Integer.toString(iterations));
     }
 }

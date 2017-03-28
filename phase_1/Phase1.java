@@ -3,7 +3,6 @@ package phase_1;
 import java.io.*;
 import java.util.*;
 
-
 public class Phase1 {
 
 	private String fileName = "k24.csv";
