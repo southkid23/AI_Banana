@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import java.util.*;
 
-class MyCanvas extends JComponent {
+public class MyCanvas extends JComponent {
 
 	private List<String> pop11 = new ArrayList<String>();
 
@@ -65,8 +65,4 @@ class MyCanvas extends JComponent {
 	public void setCoordinates(List<String> pop) {
 		pop11 = pop;
 	}
-}
-
-public class DrawThings {
-
 }

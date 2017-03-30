@@ -25,16 +25,18 @@ public class GA {
         // Loop over the new population's size and create individuals from
         // Current population
         
-            // Select parents
-            Tour parent1 = tournamentSelection(pop);
-            Tour parent2 = tournamentSelection(pop);
-            // Crossover parents
-            Tour child = crossover(parent1, parent2);
-            // Add child to new population
-            newPopulation.saveTour(pop.getLowest(), child);
+        // Select parents
+        Tour parent1 = tournamentSelection(pop);
+        Tour parent2 = tournamentSelection(pop);
+        // Crossover parents
+        Tour child = crossover(parent1, parent2);
+        // Add child to new population
+        newPopulation.saveTour(pop.getLowest(), child);
 
         // Mutate the new population a bit to add some new genetic material
         for (int i = elitismOffset; i < newPopulation.populationSize(); i++) {
+            System.out.println(newPopulation.populationSize());
+            System.out.println(i);
             mutate(newPopulation.getTour(i));
         }
 

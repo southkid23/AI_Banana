@@ -41,7 +41,11 @@ public class Phase2 {
 
         // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
-        for (int i = 0; i < 10000; i++) {
+        while (true) {
+            if(pop.isIdentical()){
+                break;
+            }
+
             pop = GA.evolvePopulation(pop);
         }
 

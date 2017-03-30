@@ -2,8 +2,9 @@ package phase_2;
 
 public class Population {
 
-    // Holds population of tours
+    // Holds population
     Tour[] tours;
+    int lowestIndex;
 
     // Generate population
     public Population(int populationSize, boolean initialize) {
@@ -21,29 +22,45 @@ public class Population {
     }
     
     // Saves a tour
-    public void saveTour(int index, Tour tour) {
-        tours[index] = tour;
-    }
+    public void saveTour(int index, Tour tour) { tours[index] = tour; }
     
     // Gets a tour from population
-    public Tour getTour(int index) {
-        return tours[index];
-    }
+    public Tour getTour(int index) { return tours[index]; }
+
+    // Gets population size 
+    public int populationSize() { return tours.length; }
+
+    // Returns the index of the lowest fitness 
+    public int getLowest() { return lowestIndex; }
 
     // Gets the best tour in the population
     public Tour getFittest() {
         Tour fittest = tours[0];
+        Tour lowest = tours[0];
+
         // Loop through individuals to find fittest
         for (int i = 1; i < populationSize(); i++) {
             if (fittest.getFitness() <= getTour(i).getFitness()) {
                 fittest = getTour(i);
             }
+            if (lowest.getFitness() > getTour(i).getFitness()) {
+                lowest = getTour(i);
+                lowestIndex = i;
+            }
         }
         return fittest;
     }
 
-    // Gets population size
-    public int populationSize() {
-        return tours.length;
+    public boolean isIdentical(){
+
+        Tour fitness = tours[0];
+        boolean flag = false;
+
+        for (int i = 1; i < populationSize(); i++) {
+            if (fitness.getFitness() != getTour(i).getFitness()) { return flag; }
+        }
+
+        return !flag;
     }
+
 }
