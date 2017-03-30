@@ -20,6 +20,15 @@ public class Population {
             }
         }
     }
+
+    public Population(Population pop) {
+        tours = new Tour[pop.populationSize()];
+
+        for(int i = 0; i < populationSize(); i++) {
+            Tour newTour = pop.getTour(i);
+            saveTour(i, newTour);
+        }
+    }
     
     // Saves a tour
     public void saveTour(int index, Tour tour) { tours[index] = tour; }
@@ -40,14 +49,15 @@ public class Population {
 
         // Loop through individuals to find fittest
         for (int i = 1; i < populationSize(); i++) {
-            if (fittest.getFitness() <= getTour(i).getFitness()) {
+            if (fittest.getFitness() > getTour(i).getFitness()) {
                 fittest = getTour(i);
             }
-            if (lowest.getFitness() > getTour(i).getFitness()) {
+            if (lowest.getFitness() < getTour(i).getFitness()) {
                 lowest = getTour(i);
                 lowestIndex = i;
             }
         }
+
         return fittest;
     }
 
@@ -63,4 +73,12 @@ public class Population {
         return !flag;
     }
 
+    public void printPop() {
+
+        for(int i = 0; i < populationSize(); i++) {
+
+            System.out.print(i + " - ");
+            tours[i].printTour();
+        }
+    }
 }

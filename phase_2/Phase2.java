@@ -36,12 +36,16 @@ public class Phase2 {
         window.setVisible(true);
 
         // Initialize population
-        Population pop = new Population(50, true);
+        Population pop = new Population(100, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
+        Tour fittest = pop.getFittest();
         while (true) {
+
+            System.out.println("\n\nNew Generation:");
+            pop.printPop();
             if(pop.isIdentical()){
                 break;
             }
@@ -52,7 +56,7 @@ public class Phase2 {
         // Print final results
         System.out.println("Final distance: " + pop.getFittest().getDistance());
         GA.getIterations();
-        Tour fittest = pop.getFittest();
+        fittest = pop.getFittest();
         System.out.println("Solution:");
         System.out.println(fittest);
 

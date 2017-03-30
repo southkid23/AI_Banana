@@ -3,7 +3,7 @@ package phase_2;
 public class GA {
 
     /* GA parameters */
-    private static final double mutationRate = 0.015;
+    private static final double mutationRate = 0.005;
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 
@@ -11,14 +11,13 @@ public class GA {
 
     // Evolves a population over one generation
     public static Population evolvePopulation(Population pop) {
-        Population newPopulation = new Population(pop.populationSize(), false);
+        Population newPopulation = new Population(pop);
 
         iterations++;
-        // Keep our best individual if elitism is enabled
-        int elitismOffset = 0;
-        if (elitism) {
-            newPopulation.saveTour(0, pop.getFittest());
-            elitismOffset = 1;
+
+        // Mutate the new population a bit to add some new genetic material
+        for (int i = 1; i < newPopulation.populationSize(); i++) {
+            mutate(newPopulation.getTour(i));
         }
 
         // Crossover population
@@ -33,12 +32,13 @@ public class GA {
         // Add child to new population
         newPopulation.saveTour(pop.getLowest(), child);
 
-        // Mutate the new population a bit to add some new genetic material
-        for (int i = elitismOffset; i < newPopulation.populationSize(); i++) {
-            System.out.println(newPopulation.populationSize());
-            System.out.println(i);
-            mutate(newPopulation.getTour(i));
+        // Keep our best individual if elitism is enabled
+        int elitismOffset = 0;
+        if (elitism) {
+            newPopulation.saveTour(0, pop.getFittest());
+            elitismOffset = 1;
         }
+
 
         // Random Organism
         //randomOrganism(newPopulation.getTour((int) (Math.random() * newPopulation.populationSize())));

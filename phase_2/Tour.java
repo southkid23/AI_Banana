@@ -13,7 +13,7 @@ public class Tour{
     // Holds our tour of cities
     private ArrayList tour = new ArrayList<City>();
     // Cache
-    private double fitness = 0;
+    private int fitness = 0;
     private int distance = 0;
     
     // Constructor: empty journey
@@ -25,6 +25,12 @@ public class Tour{
     
     public Tour(ArrayList tour){
         this.tour = tour;
+    }
+
+
+    public void printTour() {
+
+        System.out.println(fitness);
     }
 
     // Creates a random individual
@@ -52,10 +58,8 @@ public class Tour{
     }
     
     // Gets the tours fitness
-    public double getFitness() {
-        if (fitness == 0) {
-            fitness = 1/(double)getDistance();
-        }
+    public int getFitness() {
+            fitness = getDistance();
         return fitness;
     }
     
