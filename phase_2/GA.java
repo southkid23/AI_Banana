@@ -24,15 +24,14 @@ public class GA {
         // Crossover population
         // Loop over the new population's size and create individuals from
         // Current population
-        for (int i = elitismOffset; i < newPopulation.populationSize(); i++) {
+        
             // Select parents
             Tour parent1 = tournamentSelection(pop);
             Tour parent2 = tournamentSelection(pop);
             // Crossover parents
             Tour child = crossover(parent1, parent2);
             // Add child to new population
-            newPopulation.saveTour(i, child);
-        }
+            newPopulation.saveTour(pop.getLowest(), child);
 
         // Mutate the new population a bit to add some new genetic material
         for (int i = elitismOffset; i < newPopulation.populationSize(); i++) {
@@ -40,7 +39,7 @@ public class GA {
         }
 
         // Random Organism
-        //mutate2(newPopulation.getTour((int) (Math.random() * newPopulation.populationSize())));
+        //randomOrganism(newPopulation.getTour((int) (Math.random() * newPopulation.populationSize())));
 
         return newPopulation;
     }
@@ -104,7 +103,7 @@ public class GA {
         }
     }
 
-    private static void mutate2(Tour tour) {
+    private static void randomOrganism(Tour tour) {
         // Loop through tour cities
         for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
             // Apply mutation rate
