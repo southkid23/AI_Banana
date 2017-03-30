@@ -36,12 +36,12 @@ public class Phase2 {
         window.setVisible(true);
 
         // Initialize population
-        Population pop = new Population(500, true);
+        Population pop = new Population(50, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10000; i++) {
             pop = GA.evolvePopulation(pop);
         }
 

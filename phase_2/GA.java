@@ -39,6 +39,9 @@ public class GA {
             mutate(newPopulation.getTour(i));
         }
 
+        // Random Organism
+        //mutate2(newPopulation.getTour((int) (Math.random() * newPopulation.populationSize())));
+
         return newPopulation;
     }
 
@@ -87,6 +90,25 @@ public class GA {
         for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
             // Apply mutation rate
             if(Math.random() < mutationRate){
+                // Get a second random position in the tour
+                int tourPos2 = (int) (tour.tourSize() * Math.random());
+
+                // Get the cities at target position in tour
+                City city1 = tour.getCity(tourPos1);
+                City city2 = tour.getCity(tourPos2);
+
+                // Swap them around
+                tour.setCity(tourPos2, city1);
+                tour.setCity(tourPos1, city2);
+            }
+        }
+    }
+
+    private static void mutate2(Tour tour) {
+        // Loop through tour cities
+        for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
+            // Apply mutation rate
+            if(Math.random() < 0.5){
                 // Get a second random position in the tour
                 int tourPos2 = (int) (tour.tourSize() * Math.random());
 
