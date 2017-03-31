@@ -25,6 +25,7 @@ public class Population {
         tours = new Tour[pop.populationSize()];
 
         for(int i = 0; i < populationSize(); i++) {
+            // Tour newTour =  new Tour(pop.getTour(i));
             Tour newTour = pop.getTour(i);
             saveTour(i, newTour);
         }
@@ -57,6 +58,8 @@ public class Population {
                 lowestIndex = i;
             }
         }
+        fittest = new Tour(fittest);
+        System.out.println(lowestIndex);
 
         return fittest;
     }
