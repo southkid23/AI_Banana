@@ -40,14 +40,14 @@ public class Phase2 {
 
         // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
-        Tour fittest = pop.getFittest();
+        Route fittest = pop.getFittest();
 
         int count = 0;
         while (count != 3) {
 
             if(pop.isIdentical()){
                 for (int i = 1; i < pop.populationSize(); i++) {
-                    GA.cvgMutate(pop.getTour(i), 0.9);
+                    GA.cvgMutate(pop.getRoute(i), 0.9);
                 }
                 count++;
             }
@@ -63,7 +63,7 @@ public class Phase2 {
 
         String x;
         String y;
-        for (int i = 0; i < fittest.tourSize(); i++) {
+        for (int i = 0; i < fittest.routeSize(); i++) {
             x = Integer.toString(fittest.getCity(i).getX());
             y = Integer.toString(fittest.getCity(i).getY());
             ppp2.add(x);

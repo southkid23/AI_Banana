@@ -1,5 +1,5 @@
 /*
-* TourManager.java
+* RouteManager.java
 * Holds the cities of a tour
 */
 
@@ -7,7 +7,7 @@ package phase_2;
 
 import java.util.ArrayList;
 
-public class TourManager {
+public class RouteManager {
 
     // A world that contains all of the cities
     private static ArrayList worldMap = new ArrayList<City>();

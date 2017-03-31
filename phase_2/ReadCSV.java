@@ -29,7 +29,7 @@ public class ReadCSV {
             originalList.add(pos[1]);
 
             City city = new City(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
-        	TourManager.addCity(city);
+        	RouteManager.addCity(city);
 
         	// Testing class functions behaviors
 			// System.out.println(TourManager.numberOfCities());
