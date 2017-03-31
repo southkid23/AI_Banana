@@ -10,7 +10,8 @@ public class City {
     int x;
     int y;
     
-    // Constructs a randomly placed city
+
+    // Contructs a city at random location
     public City(){
 
         // The size of the domain and range: 200 and 200
@@ -20,23 +21,23 @@ public class City {
         this.y = (int)(Math.random() * sizeOfMap);
     }
     
-    // Constructs a city at chosen x, y location
+    // Contructs a city with given coordinates
     public City(int x, int y){
         this.x = x;
         this.y = y;
     }
     
-    // Gets city's x coordinate
+    // Returns the x position of a city
     public int getX(){
         return this.x;
     }
     
-    // Gets city's y coordinate
+    // Returns the y position of a city
     public int getY(){
         return this.y;
     }
     
-    // Gets the distance to given city
+    // Returns the distance between 2 cities
     public double distanceTo(City city){
         int xDistance = Math.abs(getX() - city.getX());
         int yDistance = Math.abs(getY() - city.getY());

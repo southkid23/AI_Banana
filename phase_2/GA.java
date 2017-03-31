@@ -2,38 +2,32 @@ package phase_2;
 
 public class GA {
 
-    /* GA parameters */
     private static final double mutationRate = 0.0005;
     private static final int tournamentSize = 5;
-    private static final boolean elitism = true;
+    // private static final boolean elitism = true;
 
     private static int iterations = 0;
 
-    // Evolves a population over one generation
+    // Evolves a population
     public static Population evolvePopulation(Population pop) {
 
         iterations++;
 
-        // Mutate the new population a bit to add some new genetic material
+        // Perform mutation
         for (int i = 1; i < pop.populationSize(); i++) {
             mutate(pop.getTour(i));
         }
-
-        // Crossover population
-        // Loop over the new population's size and create individuals from
-        // Current population
         
-        // Select parents
+        // Selecting the best parents
         Tour parent1 = tournamentSelection(pop);
         Tour parent2 = tournamentSelection(pop);
-        // Crossover parents
-        Tour child = crossover(parent1, parent2);
-        // Add child to new population
-        pop.saveTour(pop.getLowest(), child);
-        System.out.println(pop.getLowest());
 
-        // Keep our best individual if elitism is enabled
-        
+        // Crossover parents to produce child
+        Tour child = crossover(parent1, parent2);
+
+        // Replaces the lowest fitness with the child
+        pop.saveTour(pop.getLowest(), child);
+
         pop.saveTour(0, pop.getFittest());
 
 
@@ -43,21 +37,18 @@ public class GA {
         return pop;
     }
 
-    // Applies crossover to a set of parents and creates offspring
     public static Tour crossover(Tour parent1, Tour parent2) {
-        // Create new child tour
         Tour child = new Tour();
 
-        // Get start and end sub tour positions for parent1's tour
+        // Randomly select the start and end position
         int startPos = (int) (Math.random() * parent1.tourSize());
         int endPos = (int) (Math.random() * parent1.tourSize());
 
-        // Loop and add the sub tour from parent1 to our child
+        // Adding the subsub of the parent1 to the child
         for (int i = 0; i < child.tourSize(); i++) {
-            // If our start position is less than the end position
             if (startPos < endPos && i > startPos && i < endPos) {
                 child.setCity(i, parent1.getCity(i));
-            } // If our start position is larger
+            }
             else if (startPos > endPos) {
                 if (!(i < startPos && i > endPos)) {
                     child.setCity(i, parent1.getCity(i));
@@ -65,13 +56,11 @@ public class GA {
             }
         }
 
-        // Loop through parent2's city tour
+        // Adding the subsub of the parent2 to the child
         for (int i = 0; i < parent2.tourSize(); i++) {
-            // If child doesn't have the city add it
+            // Add only if the child doesn't have cities
             if (!child.containsCity(parent2.getCity(i))) {
-                // Loop to find a spare position in the child's tour
                 for (int ii = 0; ii < child.tourSize(); ii++) {
-                    // Spare position found, add city
                     if (child.getCity(ii) == null) {
                         child.setCity(ii, parent2.getCity(i));
                         break;
@@ -82,56 +71,70 @@ public class GA {
         return child;
     }
 
-    // Mutate a tour using swap mutation
+    // Mutation technique: Swapping cities in a tour
     private static void mutate(Tour tour) {
-        // Loop through tour cities
-        for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
-            // Apply mutation rate
+
+        for(int pos1=0; pos1 < tour.tourSize(); pos1++){
             if(Math.random() < mutationRate){
-                // Get a second random position in the tour
-                int tourPos2 = (int) (tour.tourSize() * Math.random());
+                // Gets the second position of the second
+                int pos2 = (int) (tour.tourSize() * Math.random());
 
-                // Get the cities at target position in tour
-                City city1 = tour.getCity(tourPos1);
-                City city2 = tour.getCity(tourPos2);
+                City city1 = tour.getCity(pos1);
+                City city2 = tour.getCity(pos2);
 
-                // Swap them around
-                tour.setCity(tourPos2, city1);
-                tour.setCity(tourPos1, city2);
+                // Swap the two cities
+                tour.setCity(pos2, city1);
+                tour.setCity(pos1, city2);
             }
         }
     }
+
+    // Mutation technique: Swapping cities in a tour
+    // Arguments: Tour and the mutation rates
+    public static void cvgMutate(Tour tour, double rates) {
+
+        for(int pos1=0; pos1 < tour.tourSize(); pos1++){
+
+            if(Math.random() < rates){
+                // Gets the second position of the second
+                int pos2 = (int) (tour.tourSize() * Math.random());
+
+                City city1 = tour.getCity(pos1);
+                City city2 = tour.getCity(pos2);
+
+                // Swap the two cities
+                tour.setCity(pos2, city1);
+                tour.setCity(pos1, city2);
+            }
+        }
+    }
+
 
     private static void randomOrganism(Tour tour) {
-        // Loop through tour cities
-        for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
-            // Apply mutation rate
+        for(int pos1=0; pos1 < tour.tourSize(); pos1++){
             if(Math.random() < 0.5){
-                // Get a second random position in the tour
-                int tourPos2 = (int) (tour.tourSize() * Math.random());
+                int pos2 = (int) (tour.tourSize() * Math.random());
 
-                // Get the cities at target position in tour
-                City city1 = tour.getCity(tourPos1);
-                City city2 = tour.getCity(tourPos2);
+                City city1 = tour.getCity(pos1);
+                City city2 = tour.getCity(pos2);
 
-                // Swap them around
-                tour.setCity(tourPos2, city1);
-                tour.setCity(tourPos1, city2);
+                // Swap the two cities
+                tour.setCity(pos2, city1);
+                tour.setCity(pos1, city2);
             }
         }
     }
 
-    // Selects candidate tour for crossover
     private static Tour tournamentSelection(Population pop) {
-        // Create a tournament population
+        
         Population tournament = new Population(tournamentSize, false);
-        // For each place in the tournament get a random candidate tour and
-        // add it
+        
         for (int i = 0; i < tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.populationSize());
             tournament.saveTour(i, pop.getTour(randomId));
         }
-        // Get the fittest tour
+        
+        // Gets the fittest
         Tour fittest = tournament.getFittest();
         return fittest;
     }

@@ -2,7 +2,6 @@ package phase_2;
 
 public class Population {
 
-    // Holds population
     Tour[] tours;
     int lowestIndex;
 
@@ -37,18 +36,18 @@ public class Population {
     // Gets a tour from population
     public Tour getTour(int index) { return tours[index]; }
 
-    // Gets population size 
+    // Returns the size of the population
     public int populationSize() { return tours.length; }
 
     // Returns the index of the lowest fitness 
     public int getLowest() { return lowestIndex; }
 
-    // Gets the best tour in the population
+    // Finds the fittest among all
     public Tour getFittest() {
         Tour fittest = tours[0];
         Tour lowest = tours[0];
 
-        // Loop through individuals to find fittest
+        // Finding the fittest among the list
         for (int i = 1; i < populationSize(); i++) {
             if (fittest.getFitness() > getTour(i).getFitness()) {
                 fittest = getTour(i);
@@ -59,7 +58,6 @@ public class Population {
             }
         }
         fittest = new Tour(fittest);
-        System.out.println(lowestIndex);
 
         return fittest;
     }

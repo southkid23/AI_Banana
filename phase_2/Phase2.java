@@ -11,7 +11,6 @@ import java.io.*;
 
 public class Phase2 {
 
-
     private static int canvasWidth = 300;
     private static int canvasHeight = 300;
 
@@ -42,12 +41,15 @@ public class Phase2 {
         // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
         Tour fittest = pop.getFittest();
-        while (true) {
 
-            System.out.println("\n\nNew Generation:");
-            pop.printPop();
+        int count = 0;
+        while (count != 3) {
+
             if(pop.isIdentical()){
-                break;
+                for (int i = 1; i < pop.populationSize(); i++) {
+                    GA.cvgMutate(pop.getTour(i), 0.9);
+                }
+                count++;
             }
 
             pop = GA.evolvePopulation(pop);
@@ -55,7 +57,6 @@ public class Phase2 {
 
         // Print final results
         System.out.println("Final distance: " + pop.getFittest().getDistance());
-        GA.getIterations();
         fittest = pop.getFittest();
         System.out.println("Solution:");
         System.out.println(fittest);

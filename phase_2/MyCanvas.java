@@ -27,7 +27,7 @@ public class MyCanvas extends JComponent {
 			int x = Integer.parseInt(pop11.get(i));
 			int y = Integer.parseInt(pop11.get(i+1));
 			g.setColor(Color.BLACK);
-			// Reduced by 5 to center cities
+			// Reduced by 5 to center cities in the canvas
 			g.drawOval (x-5, y-5, 10, 10);
 		}
 

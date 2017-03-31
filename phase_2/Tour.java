@@ -41,14 +41,14 @@ public class Tour{
         System.out.println(fitness);
     }
 
-    // Creates a random individual
+    // Creates a random route
     public void generateIndividual() {
         // Loop through the world Map and add them to our tour
         for (int cityIndex = 0; cityIndex < TourManager.numberOfCities(); cityIndex++) {
           setCity(cityIndex, TourManager.getCity(cityIndex));
         }
 
-        // Randomly reorder the tour
+        // Random reordering of the generated tour
         Collections.shuffle(tour);
     }
 
@@ -60,36 +60,38 @@ public class Tour{
     // Sets a city in a certain position within a tour
     public void setCity(int tourPosition, City city) {
         tour.set(tourPosition, city);
-        // If the tours been altered we need to reset the fitness and distance
+
+        // Reset the fitness and distance when there are changes to the tour
         fitness = 0;
         distance = 0;
     }
     
-    // Gets the tours fitness
+    // Returns the fitness
     public int getFitness() {
             fitness = getDistance();
         return fitness;
     }
     
-    // Gets the total distance of the tour
+    // Returns the distance of the tour
     public int getDistance(){
         if (distance == 0) {
             int tourDistance = 0;
-            // Loop through our tour's cities
+            // Going throught the cities in our tour
             for (int cityIndex=0; cityIndex < tourSize(); cityIndex++) {
-                // Get city we're travelling from
+                // Gets the origin city
                 City fromCity = getCity(cityIndex);
-                // City we're travelling to
+                // The city we're moving to next
                 City destinationCity;
-                // Check we're not on our tour's last city, if we are set our 
-                // tour's final destination city to our starting city
+                
+                // Point back to the origin city if we're at the last city
+                // in the world map
                 if(cityIndex+1 < tourSize()){
                     destinationCity = getCity(cityIndex+1);
                 }
                 else{
                     destinationCity = getCity(0);
                 }
-                // Get the distance between the two cities
+                // The distance between two cities
                 tourDistance += fromCity.distanceTo(destinationCity);
             }
             distance = tourDistance;
@@ -97,12 +99,12 @@ public class Tour{
         return distance;
     }
 
-    // Get number of cities on our tour
+    // Returns the total size of our travel
     public int tourSize() {
         return tour.size();
     }
     
-    // Check if the tour contains a city
+    // Checks if the tour has a city
     public boolean containsCity(City city){
         return tour.contains(city);
     }
