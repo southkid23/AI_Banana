@@ -10,9 +10,7 @@ import java.util.Collections;
 
 public class Route{
 
-    // Holds our route of cities
     public ArrayList route = new ArrayList<City>();
-    // Cache
     private int fitness = 0;
     private int distance = 0;
     
@@ -34,7 +32,6 @@ public class Route{
         this.fitness = route.getFitness();
         this.fitness = route.getDistance();
     }
-
 
     public void printRoute() {
 

@@ -9,7 +9,6 @@ package phase_2;
 public class City {
     int x;
     int y;
-    
 
     // Contructs a city at random location
     public City(){

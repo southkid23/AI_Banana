@@ -13,6 +13,7 @@ public class Phase2 {
 
     private static int canvasWidth = 300;
     private static int canvasHeight = 300;
+    public static long begin;
 
     public static void main(String[] args) throws Exception{
 
@@ -35,7 +36,8 @@ public class Phase2 {
         window.setVisible(true);
 
         // Initialize population
-        Population pop = new Population(100, true);
+        begin = System.currentTimeMillis();
+        Population pop = new Population(200, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         // Evolve population for 100 generations
@@ -43,7 +45,7 @@ public class Phase2 {
         Route fittest = pop.getFittest();
 
         int count = 0;
-        while (count != 3) {
+        while (count != 3 && (System.currentTimeMillis()-begin <= 600000)) {
 
             if(pop.isIdentical()){
                 for (int i = 1; i < pop.populationSize(); i++) {
@@ -76,5 +78,6 @@ public class Phase2 {
         window2.setBounds(800, 200, canvasWidth, canvasHeight);
         window2.getContentPane().add(myCanvas2);
         window2.setVisible(true);
+        System.out.println("Total time taken: " + (long)(System.currentTimeMillis()-begin) + "ms \n");
     }
 }

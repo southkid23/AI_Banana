@@ -4,7 +4,6 @@ public class GA {
 
     private static final double mutationRate = 0.0005;
     private static final int tournamentSize = 5;
-    // private static final boolean elitism = true;
 
     private static int iterations = 0;
 
