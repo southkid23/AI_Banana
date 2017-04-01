@@ -45,11 +45,11 @@ public class Phase2 {
         Route fittest = pop.getFittest();
 
         int count = 0;
-        while (count != 3 && (System.currentTimeMillis()-begin <= 600000)) {
-
+        while ((count != 3) && ((System.currentTimeMillis()-begin) <= 600000)) {
+            pop.printPop();
             if(pop.isIdentical()){
                 for (int i = 1; i < pop.populationSize(); i++) {
-                    GA.cvgMutate(pop.getRoute(i), 0.9);
+                    GA.cvgMutate(pop.getRoute(i), 0.5);
                 }
                 count++;
             }
@@ -78,6 +78,10 @@ public class Phase2 {
         window2.setBounds(800, 200, canvasWidth, canvasHeight);
         window2.getContentPane().add(myCanvas2);
         window2.setVisible(true);
-        System.out.println("Total time taken: " + (long)(System.currentTimeMillis()-begin) + "ms \n");
+        reportTime();
+    }
+
+    private static void reportTime() {
+        System.out.println("Time taken: " + (long)(System.currentTimeMillis()-begin) + "ms \n");
     }
 }
