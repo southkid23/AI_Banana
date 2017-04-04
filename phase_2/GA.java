@@ -2,7 +2,7 @@ package phase_2;
 
 public class GA {
 
-    private static final double mutationRate = 0.0005;
+    private static final double mutationRate = 0.05;
     private static final int tournamentSize = 5;
     private static final int eliteOffset = 1;
 
@@ -14,9 +14,10 @@ public class GA {
         iterations++;
 
         // Perform mutation
-        for (int i = eliteOffset; i < pop.populationSize(); i++) {
-            mutate(pop.getRoute(i));
-        }
+
+        // for (int i = 1; i < pop.populationSize(); i++) {
+        //     mutate(pop.getRoute(i));
+        // }
         
         // Selecting the best parents
         Route parent1 = tournamentSelection(pop);
@@ -24,6 +25,7 @@ public class GA {
 
         // Crossover parents to produce child
         Route child = crossover(parent1, parent2);
+        mutate(child);
 
         // Replaces the lowest fitness with the child
         pop.saveRoute(pop.getLowest(), child);

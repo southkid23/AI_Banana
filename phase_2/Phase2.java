@@ -38,10 +38,9 @@ public class Phase2 {
 
         // Initialize population
         begin = System.currentTimeMillis();
-        Population pop = new Population(100, true);
+        Population pop = new Population(200, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
-        // Evolve population for 100 generations
         pop = GA.evolvePopulation(pop);
         Route fittest = pop.getFittest();
 

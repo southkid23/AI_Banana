@@ -9,7 +9,7 @@ public class ReadCSV {
 
 	public static void read() throws Exception{
         
-		String fileName = "Cities_01.csv";
+		String fileName = "Cities_20.csv";
         String csvFile = new File("./phase_2/resources/"+fileName).getAbsolutePath();
         BufferedReader br = new BufferedReader(new FileReader(csvFile));
         String line = "";
