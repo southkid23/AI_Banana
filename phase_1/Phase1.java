@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Phase1 {
 
-	private String fileName = "k24.csv";
+	private String fileName = "k05.csv";
 	private int costLimit;
 	private List<Node> item;
 	private int pop_size = 100;
@@ -103,6 +103,7 @@ public class Phase1 {
 	private void generatePop() {
 
 		for(int i = 0; i < pop_size; i++){
+
 			pop.add(createOrganism());
 		}
 	}
@@ -110,7 +111,7 @@ public class Phase1 {
 	private String createOrganism() {
 
 		StringBuilder organism = new StringBuilder(item.size());
-
+		// System.out.println(item.size());
 		for(int i = 0; i < item.size(); i++){
 
 			double r = Math.random();
