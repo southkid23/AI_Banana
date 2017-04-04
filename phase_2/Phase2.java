@@ -38,7 +38,7 @@ public class Phase2 {
 
         // Initialize population
         begin = System.currentTimeMillis();
-        Population pop = new Population(200, true);
+        Population pop = new Population(100, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 
         pop = GA.evolvePopulation(pop);
