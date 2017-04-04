@@ -14,6 +14,7 @@ public class Phase2 {
     private static int canvasWidth = 300;
     private static int canvasHeight = 300;
     public static long begin;
+    private static int eliteOffset = 1;
 
     public static void main(String[] args) throws Exception{
 
@@ -48,7 +49,7 @@ public class Phase2 {
         while ((count != 3) && ((System.currentTimeMillis()-begin) <= 600000)) {
             pop.printPop();
             if(pop.isIdentical()){
-                for (int i = 1; i < pop.populationSize(); i++) {
+                for (int i = eliteOffset; i < pop.populationSize(); i++) {
                     GA.cvgMutate(pop.getRoute(i), 0.5);
                 }
                 count++;
